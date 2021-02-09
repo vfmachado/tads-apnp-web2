@@ -1,0 +1,19 @@
+
+<%- include('./components/head.ejs') %>
+
+<body>
+
+    <% if (posts.length == 0) { %>
+        <h1>Nenhum post foi adicionado</h1>
+    <% } else { %>
+        <h1>Lista de posts</h1>
+
+        <ul>
+        <% for (let i = 0; i < posts.length; i++) { %>
+            <li><a href="/posts/<%= posts[i].id %>"><%= posts[i].title %></a></li>
+        <% } %>
+        </ul>
+    <% } %>
+
+</body>
+</html>
