@@ -40,14 +40,63 @@ export class PostController {
         
     }
 
+    async showUpdatePage(req: Request, res: Response): Promise<void> {
+        
+        try {
+            const id = Number(req.params.id);
+            const post = await Post.getById(id);
+            res.render('updatePost', { post })
+          
+        } catch (error) {
+            res.status(404).render('404');
+        }
+         
+    }
+
+
+    async updateByID(req: Request, res: Response): Promise<void> {
+        
+        try {
+            const id = Number(req.params.id);
+            const post = await Post.getById(id);
+
+            post.title = req.body.title;
+            post.text = req.body.text;
+
+            await Post.update(post); 
+            res.redirect('/posts');
+
+
+        } catch (error) {
+            res.status(404).render('404');
+        }
+        
+    }
+
+
+    async deleteByID(req: Request, res: Response): Promise<void> {
+        
+        try {
+            const id = Number(req.params.id);
+            await Post.deleteById(id);
+            
+            res.redirect('/posts');
+          
+        } catch (error) {
+            res.status(404).render('404');
+        }
+        
+    }
+
     add(req: Request, res: Response): void {
         
         const {title, text} = req.body;
         const post = new Post(title, text);
         
-        post.save();
+        post.save(() => {
+            res.redirect('/posts');
+        });
 
-        res.end("Recebido! \n" + JSON.stringify(req.body, null, 2));;
     }
 
     showAddPage(req: Request, res: Response): void {

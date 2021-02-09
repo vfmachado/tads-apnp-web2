@@ -22,7 +22,7 @@ export class Post implements IPost {
         this.publishedDate = date ? date : new Date();
     }
 
-    save(): void {
+    save(callback: Function): void {
         
         let sql = `INSERT INTO post (title, text, publishedDate) VALUES (?, ?, ?);`
         db.run(sql, [this.title, this.text, this.publishedDate.getTime()], (err) => {
@@ -30,7 +30,8 @@ export class Post implements IPost {
                 console.log("Erro", err);
             }
 
-            console.log("Dado adicionado com sucesso! ");
+            callback();
+            
         });
 
     }
@@ -68,8 +69,50 @@ export class Post implements IPost {
                 if (err)
                     console.log(err);
 
-                resolve(rows[0]);
+                const post: IPost = {
+                    ...rows[0],
+                    publishedDate: new Date(rows[0].publishedDate)
+                }
+                resolve(post);
             });
+
+        });
+
+    }
+
+    static deleteById(id: number): Promise<void> {
+
+        return new Promise<void>((resolve, reject) => {
+            let sql = `DELETE FROM post WHERE post.id = ?;`
+            db.run(sql, [id], (err) => {
+                if (err) {
+                    console.log("Erro", err);
+                    reject(err);
+                }
+
+                resolve();
+                console.log("Dado removido com sucesso! ");
+            });
+        });
+    }
+
+
+    static update(post: IPost): Promise<void> {
+
+        return new Promise((resolve, reject) => {
+
+            const sql = `UPDATE post
+            SET title = ?, text = ?
+            WHERE post.id = ?;`;
+
+            db.run(sql, [post.title, post.text, post.id], err => {
+                if (err) {
+                    console.log("Erro", err);
+                    reject(err);
+                }
+
+                resolve();
+            })
 
         });
 
