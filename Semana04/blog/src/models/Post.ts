@@ -5,27 +5,19 @@ export interface IPost {
     id: number,
     title: string,
     text: string,
-    publishedDate: Date;
+    publishedDate?: Date;
 }
 
-export class Post implements IPost {
+export class Post  {
     
-    id: number;
-    title: string;
-    text: string;
-    publishedDate: Date;
-
-    constructor(title: string, text: string, date?: Date) {
-        this.id = 0;
-        this.title = title;
-        this.text = text;
-        this.publishedDate = date ? date : new Date();
-    }
-
-    save(callback: Function): void {
+    static save(post: IPost, callback: Function): void {
         
+        if (!post.publishedDate) {
+            post.publishedDate = new Date();
+        }
+
         let sql = `INSERT INTO post (title, text, publishedDate) VALUES (?, ?, ?);`
-        db.run(sql, [this.title, this.text, this.publishedDate.getTime()], (err) => {
+        db.run(sql, [post.title, post.text, post.publishedDate], (err) => {
             if (err) {
                 console.log("Erro", err);
             }

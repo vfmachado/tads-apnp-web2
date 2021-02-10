@@ -90,10 +90,8 @@ export class PostController {
 
     add(req: Request, res: Response): void {
         
-        const {title, text} = req.body;
-        const post = new Post(title, text);
-        
-        post.save(() => {
+        const post = req.body;
+        Post.save(post, () => {
             res.redirect('/posts');
         });
 
