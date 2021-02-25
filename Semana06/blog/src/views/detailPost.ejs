@@ -1,0 +1,17 @@
+
+<%- include('./components/head.ejs') %>
+
+</head>
+<body>
+    
+    <h1><a href="/posts">Voltar</a></h1>
+
+    <hr>
+
+    <h1><%= post.title %></h1>
+    <h2><%= post.publishedDate.toLocaleDateString() %> - <%= post.publishedDate.toLocaleTimeString() %></h2>
+    <p>
+        <%= post.text %>
+    </p>
+</body>
+</html>

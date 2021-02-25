@@ -1,0 +1,23 @@
+
+<%- include('./components/head.ejs') %>
+
+</head>
+<body>
+    <h1>POST-IF</h1>
+
+    <% if (loggedIn) { %>
+        <h1>Bem vindo</h1>
+    <% } else { %>
+        <h1>Faça o Login</h1>
+    <% } %>
+    
+    <button onclick="location.href='users/login'">
+        Login
+    </button>
+
+    <button onclick="location.href='users/signup'">
+        Cadastro
+    </button>
+
+</body>
+</html>

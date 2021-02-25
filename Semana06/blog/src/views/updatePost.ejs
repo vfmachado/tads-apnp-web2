@@ -1,0 +1,27 @@
+
+<%- include('./components/head.ejs') %>
+
+</head>
+<body>
+    
+    <h1><a href="/posts">Voltar</a></h1>
+
+    <hr>
+
+    <h1>Título Original: <%= post.title %></h1>
+    <h2>Data de Publicação: <%= post.publishedDate.toLocaleDateString() %> - <%= post.publishedDate.toLocaleTimeString() %></h2>
+
+    <form method="POST">
+        <input hidden name="id" value="<%= post.id %>" />
+
+        <label for="title">Titulo</label>
+        <input name="title" value="<%= post.title %>" />
+        <br>
+        <label for="text">Texto</label>
+        <input name="text" value="<%= post.text %>" />
+        <br>
+        <input type="submit" value="Enviar" />
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+
+<%- include('./components/head.ejs') %>
+
+</head>
+<body>
+    <h1>A página 
+        <% if (locals.url) { %> 
+            <%= url %>  
+        <% } %> 
+        que você busca não foi encontrada</h1>
+</body>
+</html>
