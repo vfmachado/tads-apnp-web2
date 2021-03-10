@@ -1,0 +1,45 @@
+
+<%- include('./components/head.ejs') %>
+
+
+
+</head>
+<body>
+
+    <h1><a href="/posts/add">Adicionar</a></h1>
+
+    <hr>
+
+    <form>
+        <input type="text" name="title">
+        <input type="submit" value="FILTRAR" >
+    </form>
+
+
+    <% if (posts.length == 0) { %>
+        <h1>Nenhum post foi adicionado</h1>
+    <% } else { %>
+
+       
+        <h1>Lista de posts</h1>
+
+        <table>
+            <thead>
+                <th>Título</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < posts.length; i++) { %>
+                    <tr>
+                        <td><a href="/posts/<%= posts[i].id %>"><%= posts[i].title %></a></td>
+                        <td><a href="/posts/update/<%= posts[i].id %>">ATUALIZAR</a></td>
+                        <td><a href="/posts/delete/<%= posts[i].id %>">EXCLUIR</a></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } %>
+
+</body>
+</html>
