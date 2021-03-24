@@ -1,0 +1,28 @@
+<%- include('./components/head.ejs') %>
+
+</head>
+
+<body>
+
+    <%- include('./components/menu.ejs') %>
+
+        <h1>PROFILE PAGE</h1>
+
+        <div class="d-flex justify-content-center">
+            <form action="/addImage" method="POST" style="width:600px" enctype="multipart/form-data">
+
+                <label for="inputTitle" class="mt-2">Título</label>
+                <input type="text" id="inputTitle" class="form-control" name="title" autofocus>
+
+                <label for="inputFile" class="mt-2">Imagem</label>
+                <input type="file" id="inputFile" class="form-control" name="image" accept="image/*" autofocus required>
+
+                <label for="inputTags" class="mt-2">TAGS - Separe por vírgula</label>
+                <input type="text" id="inputTags" class="form-control" name="tags" autofocus>
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit">SUBMIT</button>
+            </form>
+        </div>
+</body>
+
+</html>
